@@ -6,6 +6,7 @@ class Setup extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('setup_model');
+
     }
 
     public function index(){
@@ -20,6 +21,8 @@ class Setup extends CI_Controller {
       }
 
     }
+
+
 
 
 }
