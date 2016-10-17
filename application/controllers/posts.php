@@ -11,6 +11,7 @@ class Posts extends CI_Controller {
     }
 
     public function index(){
+
         $data['title'] = 'Posts';
         $data['posts'] = $this->posts_model->getAll();
         $data['report_form'] = $this->load->view('report_view','',true);
@@ -26,7 +27,6 @@ class Posts extends CI_Controller {
         $this->form_validation->set_error_delimiters('<p class = "error_message">','</p>');
 
         $data['title'] = 'Add post';
-        $data['db_error'] = '';
         If($this->form_validation->run()){
             if($this->posts_model->createPost()){
 

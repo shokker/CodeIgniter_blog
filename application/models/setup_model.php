@@ -5,6 +5,7 @@ class Setup_model extends CI_Model {
     public function __construct(){
         parent::__construct();
         $this->load->dbforge();
+        $this->load->helper('my_helper');
     }
 
     public function createDbPostTable()
@@ -27,7 +28,7 @@ class Setup_model extends CI_Model {
                 'type' => 'TIMESTAMP'
             )
         );
-        return $this->createTable($fields_posts,'id','posts');
+        return createTable($fields_posts,'id','posts');
 
     }
 
@@ -56,16 +57,11 @@ class Setup_model extends CI_Model {
                 'type'=>'TIMESTAMP'
             )
         );
-        return $this->createTable($fields_reports,'id','reports');
+        return createTable($fields_reports,'id','reports');
 
 
     }
-    public function createTable($fields,$primary_key,$table_name)
-    {
-        $this->dbforge->add_field($fields);
-        $this->dbforge->add_key($primary_key);
-        return $this->dbforge->create_table($table_name,TRUE);
-    }
+
 
 
 }

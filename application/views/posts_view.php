@@ -1,4 +1,7 @@
 <h1>Posts</h1>
+<?php if($this->session->flashdata('report_message')) : ?>
+<div class="errors"><?  echo $this->session->flashdata('report_message'); ?></div>
+<?php endif; ?>
 
 
 <?php foreach ($posts as $post) : ?>
@@ -10,3 +13,6 @@
 <?php endforeach; ?>
 
 <?= $report_form ?>
+<div class="errors">
+    <?= validation_errors() ?>
+</div>
