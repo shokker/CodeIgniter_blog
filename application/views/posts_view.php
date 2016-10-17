@@ -8,3 +8,5 @@
 
 
 <?php endforeach; ?>
+
+<?= $report_form ?>

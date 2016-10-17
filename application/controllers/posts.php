@@ -13,6 +13,7 @@ class Posts extends CI_Controller {
     public function index(){
         $data['title'] = 'Posts';
         $data['posts'] = $this->posts_model->getAll();
+        $data['report_form'] = $this->load->view('report_view','',true);
 
         $this->template->view('posts_view',$data);
 
@@ -42,6 +43,8 @@ class Posts extends CI_Controller {
         }
 
     }
+
+
 
 
 
