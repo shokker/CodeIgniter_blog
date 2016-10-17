@@ -9,6 +9,7 @@ class Setup extends CI_Controller {
     }
 
     public function index(){
+        $data['title'] = 'Setup';
 
       if($this->setup_model->createDbPostTable() && $this->setup_model->createReportsTable()){
           $data['message'] = "tables loaded!";
@@ -17,8 +18,6 @@ class Setup extends CI_Controller {
           $data['message'] = "whoops something went wrong";
           $this->template->view('setup_view', $data);
       }
-
-        
 
     }
 
