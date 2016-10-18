@@ -144,6 +144,9 @@ small{
     width: auto;
     background-color: #AB3029;
 }
+.author a{
+    color: #fff;
+}
 
 .link_report {
     margin: 20px auto;
