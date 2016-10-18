@@ -9,7 +9,7 @@ body{
     padding: 0;
     margin-top: 50px;
     box-shadow: 0px 0px 5px #4B4B4B;
-    background-color: #F8F8F8;
+    background-color: #7F95DF;
     border-radius: 5px;
     margin-bottom: 20px;
     min-height: 100%;
@@ -21,6 +21,7 @@ h1{
 }
 
 .post{
+    border-radius: 5px;
     background-color: #fff;
     box-shadow: 0px 0px 5px #4B4B4B;
     width: 90%;
@@ -34,10 +35,11 @@ h1{
 .text_panel{
     padding: 5px;
     border-bottom: 1px dotted #606060;
-    border-top: 1px dotted #606060;
+
 }
 .post_header{
-    padding: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     background-color: #FF7856;
 }
 small{
@@ -48,10 +50,6 @@ small{
 }
 .post_body{
     padding: 10px;
-}
-footer{
-    background-color: #7F95DF;
-
 }
 .footer-info{
     background-color: #566AAB;
