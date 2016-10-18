@@ -8,7 +8,7 @@ class Report extends CI_Controller {
         $this->load->model('report_model');
         $this->load->model('posts_model');
         $this->load->library('form_validation');
-        $this->load->library('email',$config);
+
 
 
         $this->load->helper('url');
@@ -25,8 +25,9 @@ class Report extends CI_Controller {
         if($this->form_validation->run()){
             if($this->report_model->createReport()){
 
-                $this->session->set_flashdata('report_message','Report send');
 
+                $this->session->set_flashdata('report_message','Report send');
+                $this->load->library('email',$config);
                 $this->email->set_newline("\r\n");
                 $this->email->from('lukas.danko1@gmail.com', "Lukáš Danko");
                 $this->email->to($this->input->post('email'));
@@ -47,10 +48,8 @@ class Report extends CI_Controller {
             }
 
         }else{
-            $data['title'] = 'Posts';
-            $data['posts'] = $this->posts_model->getAll();
-            $data['report_form'] = $this->load->view('report_view','',true);
-            $this->template->view('posts_view',$data);
+            $this->session->set_flashdata('error',validation_errors());
+            redirect('posts');
         }
 
 

@@ -7,7 +7,7 @@ class Posts extends CI_Controller {
         parent::__construct();
         $this->load->model('posts_model');
         $this->load->library('form_validation');
-        $this->load->helper(array('form','url'));
+        $this->load->helper(array('form','url','typography'));
     }
 
     public function index(){
@@ -21,6 +21,7 @@ class Posts extends CI_Controller {
     }
     public function addPost()
     {
+        $data['db_error'] ='';
         $this->form_validation->set_rules('title','Title','required|min_length[4]')
             ->set_rules('text','Text','required|');
 
