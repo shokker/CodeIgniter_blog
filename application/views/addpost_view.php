@@ -2,7 +2,7 @@
 
 <div class="addPost_form">
     <?php if($db_error) : ?>
-        <div class="errors"><? $db_error ?></div>
+        <div class="errors"><?= $db_error ?></div>
     <?php endif; ?>
     <?php
     echo form_open('posts/addPost'),

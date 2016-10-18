@@ -1,6 +1,6 @@
 <h1>Posts</h1>
 <?php if($this->session->flashdata('report_message')) : ?>
-<p class="warning"><?  echo $this->session->flashdata('report_message'); ?></p>
+<p class="warning"><?php  echo $this->session->flashdata('report_message'); ?></p>
 <?php endif; ?>
 
 
