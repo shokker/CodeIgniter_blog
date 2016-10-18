@@ -367,6 +367,10 @@ $config['proxy_ips'] = '';
 
 // timezone
 
+
+//email conf
+
+
 date_default_timezone_set('Europe/Bratislava');
 /* End of file config.php */
 /* Location: ./application/config/config.php */
