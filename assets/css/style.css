@@ -117,7 +117,7 @@ small{
 }
 .errors{
     text-align: center;
-    color: red;
+    color: #3F437E;
 
 }
 .error_message:first-child{
