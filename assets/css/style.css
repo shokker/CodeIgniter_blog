@@ -8,6 +8,8 @@ body{
     box-shadow: 0px 0px 5px #4B4B4B;
     background-color: #F8F8F8;
     border-radius: 5px;
+    margin-bottom: 20px;
+    min-height: 100%;
 }
 
 h1{
