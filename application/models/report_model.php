@@ -14,6 +14,11 @@ class Report_model extends CI_Model {
         return $query;
 
     }
+    public function getAll()
+    {
+        $query = $this->db->order_by('date','desc')->get('reports');
+        return $query->result();
+    }
 
 
 }

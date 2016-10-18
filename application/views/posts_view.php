@@ -16,7 +16,7 @@
 
 <?php endforeach; ?>
 <div class="link">
-    <?php echo anchor('posts/addPost','Add post',array('class'=>'link_a')) ?>
+    <?php echo anchor('posts/addPost','Add post',array('class'=>'link_a')); ?>
 </div>
 <footer>
     <?= $report_form ?>
@@ -24,6 +24,6 @@
     <div class="errors"><?= $this->session->flashdata('error')  ?></div>
     <?php endif; ?>
     <div class="footer-info">
-        Created by Lukáš Danko
+        Created by Lukáš Danko | <?php echo anchor('report','Reports'); ?>
     </div>
 </footer>

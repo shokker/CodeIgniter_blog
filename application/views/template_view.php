@@ -5,8 +5,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?= $title ?></title>
+	<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<link href="<?= base_url()?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?= base_url()?>assets/css/style.css" rel="stylesheet">
+	<link href="<?= base_url()?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
 <body>
 

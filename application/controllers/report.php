@@ -8,11 +8,19 @@ class Report extends CI_Controller {
         $this->load->model('report_model');
         $this->load->model('posts_model');
         $this->load->library('form_validation');
+        $this->load->helper('typography');
 
 
 
         $this->load->helper('url');
 
+    }
+
+    public function index()
+    {
+        $data['title'] = 'Reports';
+        $data['reports'] = $this->report_model->getAll();
+        $this->template->view('reports_list_view',$data);
     }
 
     public function createReport(){
