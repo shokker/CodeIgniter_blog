@@ -189,3 +189,9 @@ footer{
     margin-bottom: 420px;
 }
 
+.dataTables_wrapper{
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #2aabd2;
+}
