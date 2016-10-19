@@ -1,3 +1,4 @@
+<div class="section">
 <h1>Posts</h1>
 <?php if($this->session->flashdata('report_message')) : ?>
 <p class="warning"><?php  echo $this->session->flashdata('report_message'); ?></p>
@@ -18,5 +19,6 @@
 <?php endforeach; ?>
 <div class="link">
     <?php echo anchor('posts/add','Add post',array('class'=>'link_a')); ?>
+</div>
 </div>
 

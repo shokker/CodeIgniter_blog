@@ -14,7 +14,9 @@
 <body>
 
 <div class="container">
+
 	<?= $content ?>
+
 
 <footer>
 	<?php if ($report_form): ?>

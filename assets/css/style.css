@@ -1,8 +1,10 @@
 html{
     height: 100%;
+
 }
 body{
     height: 100%;
+
     background-color: #3F437E;
     font: 400 14px/1.6 'Open Sans', Verdana, Helvetica, sans-serif;
 
@@ -27,6 +29,7 @@ h1{
 }
 
 .post{
+    position: relative;
     border-radius: 5px;
     background-color: #fff;
     box-shadow: 0px 0px 5px #4B4B4B;
@@ -182,5 +185,7 @@ footer{
 .footer-info a{
     color: #000;
 }
-
+.section{
+    margin-bottom: 420px;
+}
 
