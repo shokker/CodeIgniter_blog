@@ -26,6 +26,10 @@ class Setup_model extends CI_Model {
             ),
             'date' => array(
                 'type' => 'TIMESTAMP'
+            ),
+            'slug' => array(
+                'type'=>'VARCHAR',
+                'constraint'=>100
             )
         );
         return createTable($fields_posts,'id','posts');

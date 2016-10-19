@@ -15,6 +15,18 @@
 
 <div class="container">
 	<?= $content ?>
+
+<footer>
+	<?php if ($report_form): ?>
+		<?= $report_form ?>
+		<?php if($this->session->flashdata('error')) : ?>
+			<div class="errors"><?= $this->session->flashdata('error')  ?></div>
+		<?php endif; ?>
+	<?php endif; ?>
+	<div class="footer-info">
+		Created by Lukáš Danko | <?php echo anchor('report','Reports'); ?>
+	</div>
+</footer>
 </div>
 
 </body>

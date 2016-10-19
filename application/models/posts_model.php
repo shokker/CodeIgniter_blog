@@ -11,12 +11,22 @@ class Posts_model extends CI_Model {
 
     public function createPost()
     {
+        $id = $this->db->select_max('id')->get('posts')->row()->id;
+
         $data = array(
             'title'=>$this->input->post('title'),
             'text'=>$this->input->post('text')
         );
+        $data['slug'] = create_slug($data['title'],$id);
         $query = $this->db->insert('posts',$data);
         return $query;
+    }
+
+    public function showPost($slug)
+    {
+
+        $query = $this->db->where('slug',$slug)->get('posts');
+        return $query->row();
     }
 
 

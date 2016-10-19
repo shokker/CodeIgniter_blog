@@ -6,18 +6,22 @@ class Setup extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('setup_model');
+        $this->load->helper('url');
+        $this->data['report_form'] = '';
+
 
     }
 
     public function index(){
-        $data['title'] = 'Setup';
+
+        $this->data['title'] = 'Setup';
 
       if($this->setup_model->createDbPostTable() && $this->setup_model->createReportsTable()){
-          $data['message'] = "tables loaded!";
-          $this->template->view('setup_view',$data);
+          $this->data['message'] = "tables loaded!";
+          $this->template->view('setup_view', $this->data);
         }else {
-          $data['message'] = "whoops something went wrong";
-          $this->template->view('setup_view', $data);
+          $this->data['message'] = "whoops something went wrong";
+          $this->template->view('setup_view',  $this->data);
       }
 
     }

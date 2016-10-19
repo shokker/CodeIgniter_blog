@@ -5,7 +5,7 @@
         <div class="errors"><?= $db_error ?></div>
     <?php endif; ?>
     <?php
-    echo form_open('posts/addPost'),
+    echo form_open('posts/add'),
     form_input('title',set_value('title'),'placeholder=Title class=form-control'),
     form_textarea('text','','class=form-control'),
     form_submit('submit','Add post','class="btn btn-default"'),

@@ -8,7 +8,9 @@ class Report extends CI_Controller {
         $this->load->model('report_model');
         $this->load->model('posts_model');
         $this->load->library('form_validation');
-        $this->load->helper('typography','url');
+        $this->load->helper('typography','url','my_helper');
+        $this->data['report_form']='';
+
 
 
 
@@ -18,9 +20,9 @@ class Report extends CI_Controller {
 
     public function index()
     {
-        $data['title'] = 'Reports';
-        $data['reports'] = $this->report_model->getAll();
-        $this->template->view('reports_list_view',$data);
+        $this->data['title'] = 'Reports';
+        $this->data['reports'] = $this->report_model->getAll();
+        $this->template->view('reports_list_view',$this->data);
     }
 
     public function createReport(){
