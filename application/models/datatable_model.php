@@ -39,7 +39,8 @@ class Datatable_model extends CI_Model {
                     ) )
                     ->getFormatter( 'Format::date_sql_to_format', Format::DATE_ISO_8601 )
                     ->setFormatter( 'Format::date_format_to_sql', Format::DATE_ISO_8601 ),
-                Field::inst( 'slug' )->set( Field::SET_CREATE )->set( Field::SET_EDIT )
+                Field::inst( 'slug' )->set( Field::SET_BOTH )
+
             )->on('preCreate',function ($editor,$values){
                     $id = $this->db->select_max('id')->get('posts')->row()->id;
                     $editor
