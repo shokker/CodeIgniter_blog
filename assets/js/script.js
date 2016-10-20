@@ -1,3 +1,7 @@
+function format ( d ) {
+    return '<strong>Post Text:</strong><br>'+
+        d.text;
+}
 var editor;
 // use a global for the submit and return data rendering in the examples
 
@@ -11,6 +15,7 @@ $(function(){
     editor = new $.fn.dataTable.Editor( {
             "ajax": "ajax/posts",
             "table": "#example",
+            "display": 'envelope',
             "fields": [  {
                 "label": "Title:",
                 "name": "title"
@@ -21,9 +26,66 @@ $(function(){
             }
             ]
         } );
+    $('a.editor_create').on( 'click', function (e) {
+        e.preventDefault();
 
-        $('#example').DataTable( {
-            dom: "Bfrtip",
+        editor
+            .title( 'Create new record' )
+            .buttons( { "label": "Add", "fn": function () { editor.submit() } } )
+            .create();
+    } );
+
+    // Edit record
+    $('#example').on( 'click', 'a.editor_edit', function (e) {
+        e.preventDefault();
+
+        editor
+            .title( 'Edit record' )
+            .buttons( { "label": "Update", "fn": function () { editor.submit() } } )
+            .edit( $(this).closest('tr') );
+    } );
+
+    // Delete a record
+    $('#example').on( 'click', 'a.editor_remove', function (e) {
+        e.preventDefault();
+
+        editor
+            .title( 'Delete record' )
+            .message( "Are you sure you wish to delete this row?" )
+            .buttons( { "label": "Delete", "fn": function () { editor.submit() } } )
+            .remove( $(this).closest('tr') );
+    } );
+    //show post text
+    var detailRows = [];
+
+    $('#example').on( 'click', 'a.details-control', function (e) {
+        e.preventDefault();
+        console.log('klikol');
+        var tr = $(this).closest('tr');
+        var row = dt.row( tr );
+        var idx = $.inArray( tr.attr('id'), detailRows );
+
+        if ( row.child.isShown() ) {
+            tr.removeClass( 'details' );
+            row.child.hide();
+
+            // Remove from the 'open' array
+            detailRows.splice( idx, 1 );
+        }
+        else {
+            tr.addClass( 'details' );
+            row.child( format( row.data() ) ).show();
+
+            // Add to the 'open' array
+            if ( idx === -1 ) {
+                detailRows.push( tr.attr('id') );
+            }
+        }
+    } );
+
+
+       var dt = $('#example').DataTable( {
+            dom: "rtip",
             ajax: {
                 url: "ajax/posts",
                 type: "POST"
@@ -31,19 +93,29 @@ $(function(){
             serverSide: true,
             columns: [
                 { data: "title" },
-                { data: "date" }
+                { data: "date" },
+                {
+                    data: "text",
+                    visible:false,
+                    searchable: false},
+                {
+                    data: null,
+                    className: "center",
+                    defaultContent: '<a href="" class="editor_edit btn btn-primary btn-sm tableEdit" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> ' +
+                    '<a href=""  role="button" class="editor_remove btn btn-danger btn-sm tableEdit"><i class="fa fa-times" aria-hidden="true"></i></a> ' +
+                    '<a href=""  role="button" class="details-control btn btn-success btn-sm tableEdit"><i class="fa fa-eye" aria-hidden="true"></i></a>'
+                }
 
             ],
             select: true,
             buttons: [
-                { extend: "create", editor: editor },
-                { extend: "edit",   editor: editor },
-                { extend: "remove", editor: editor }
+                { extend: "create", editor: editor }
+
             ]
         } );
 
     $('#reportsTable').DataTable( {
-        dom: "Bfrtip",
+        dom: "Brtip",
         ajax: {
             url: "ajax/reports",
             type: "POST"
