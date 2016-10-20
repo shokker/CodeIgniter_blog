@@ -15,6 +15,7 @@ $(function(){
                 "name": "title"
             },  {
                 "label": "Text:",
+                "type": "textarea",
                 "name": "text"
             }
             ]
@@ -28,9 +29,7 @@ $(function(){
             },
             serverSide: true,
             columns: [
-                { data: "id" },
                 { data: "title" },
-                { data: "text" },
                 { data: "date" }
 
             ],
