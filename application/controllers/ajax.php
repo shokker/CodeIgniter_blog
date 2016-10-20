@@ -2,14 +2,20 @@
 
 class Ajax extends CI_Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('EditorLib');
+    }
+
 
     public function posts()
     {
-        //Load our library EditorLib
-        $this->load->library('EditorLib');
-
-
         $this->editorlib->process($_POST,'datatable_model');
+    }
+    public function reports()
+    {
+        $this->editorlib->process($_POST,'datatable_reports_model');
     }
 
 

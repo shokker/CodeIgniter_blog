@@ -190,8 +190,16 @@ footer{
 }
 
 .dataTables_wrapper{
+    border-radius: 10px;
     width: 90%;
     margin: 20px auto;
     padding: 20px;
-    background-color: #2aabd2;
+    background-color: #bbc8fa;
+}
+h2{
+    font: 400 40px/1.3 'Bree Serif', Georgia, serif;
+    text-align: center;
+    color: #5b5a7e;
+    text-shadow: #fff 0px 0px 2px;
+
 }

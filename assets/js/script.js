@@ -1,4 +1,5 @@
-var editor; // use a global for the submit and return data rendering in the examples
+var editor;
+// use a global for the submit and return data rendering in the examples
 
 $(function(){
 
@@ -40,5 +41,28 @@ $(function(){
                 { extend: "remove", editor: editor }
             ]
         } );
+
+    $('#reportsTable').DataTable( {
+        dom: "Bfrtip",
+        ajax: {
+            url: "ajax/reports",
+            type: "POST"
+        },
+        serverSide: true,
+        columns: [
+            { data: "title" },
+            { data: "author" },
+            { data: "date" }
+
+        ],
+        select: true,
+        buttons: [
+            { extend: "remove", editor: editor }
+        ]
+    } );
+
+
+
+
 });
 
