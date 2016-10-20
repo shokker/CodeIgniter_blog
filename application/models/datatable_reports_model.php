@@ -32,14 +32,15 @@ class Datatable_reports_model extends CI_Model {
                 Field::inst( 'id' )->validator( 'Validate::notEmpty' ),
                 Field::inst( 'title' )->validator( 'Validate::notEmpty' ),
                 Field::inst( 'text' ),
+                Field::inst( 'author' ),
                 Field::inst( 'date' )
                     ->validator( 'Validate::dateFormat', array(
                         "format"  => Format::DATE_ISO_8601,
                         "message" => "Please enter a date in the format yyyy-mm-dd"
                     ) )
                     ->getFormatter( 'Format::date_sql_to_format', Format::DATE_ISO_8601 )
-                    ->setFormatter( 'Format::date_format_to_sql', Format::DATE_ISO_8601 ),
-                Field::inst( 'author' ))
+                    ->setFormatter( 'Format::date_format_to_sql', Format::DATE_ISO_8601 ))
+
             ->process( $post )
             ->json();
     }

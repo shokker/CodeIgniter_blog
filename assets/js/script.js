@@ -3,6 +3,7 @@ function format ( d ) {
         d.text;
 }
 var editor;
+var reportEditor;
 // use a global for the submit and return data rendering in the examples
 
 $(function(){
@@ -15,7 +16,6 @@ $(function(){
     editor = new $.fn.dataTable.Editor( {
             "ajax": "ajax/posts",
             "table": "#example",
-            "display": 'envelope',
             "fields": [  {
                 "label": "Title:",
                 "name": "title"
@@ -107,12 +107,22 @@ $(function(){
                 }
 
             ],
-            select: true,
-            buttons: [
-                { extend: "create", editor: editor }
+            select: true
 
-            ]
         } );
+
+    // reportEditor = new $.fn.dataTable.Editor( {
+    //     "ajax": "ajax/reports",
+    //     "table": "#reportsTable"
+    //
+    // } );
+
+    reportEditor = new $.fn.dataTable.Editor( {
+        "ajax": "ajax/reports",
+        "table": "#reportsTable"
+
+    } );
+
 
     $('#reportsTable').DataTable( {
         dom: "Brtip",
@@ -125,11 +135,10 @@ $(function(){
             { data: "title" },
             { data: "author" },
             { data: "date" }
-
         ],
         select: true,
         buttons: [
-            { extend: "remove", editor: editor }
+            { extend: "remove", editor: reportEditor }
         ]
     } );
 

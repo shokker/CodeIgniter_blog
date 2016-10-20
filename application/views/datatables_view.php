@@ -25,13 +25,14 @@
 </div>
 <h2>Reports</h2>
 <div class="wrapper">
-<table id="reportsTable" class="table"  width="90%" cellspacing="0">
+<table id="reportsTable" class="table table-striped table-bordered"  width="90%" cellspacing="0">
     <thead>
 
     <tr>
         <th>Title</th>
         <th>Author</th>
         <th>Date</th>
+
 
     </tr>
     </thead>
@@ -40,6 +41,7 @@
         <th>Title</th>
         <th>Author</th>
         <th>Date</th>
+
 
     </tr>
     </tfoot>

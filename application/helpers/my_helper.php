@@ -20,7 +20,7 @@ if(! function_exists('createTable')){
 
     }
     function create_slug($title,$id =0 ){
-        $array = explode(' ',strtolower($title));
+        $array = explode(' ',trim(strtolower($title)));
         return implode('-',$array) . "-" . ($id+1);
     }
 }
