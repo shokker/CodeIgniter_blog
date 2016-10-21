@@ -1,6 +1,6 @@
 function format ( d ,name) {
-    return '<strong>'+name.toUpperCase()+' Text:</strong><br>'+
-        d.text;
+    return '<strong>'+name.toUpperCase()+' Text:</strong><br><div class="detailtext">'+
+        d.text + '</div>';
 }
 function removeDT(editor,DT) {
     editor
@@ -11,27 +11,45 @@ function removeDT(editor,DT) {
 
 }
 function showDetailDT(dt,name,this$) {
+
+
     var tr = this$.closest('tr');
+
+    var row_prev = dt.row(tr);
     var row = dt.row( tr );
-    var idx = $.inArray( tr.attr('id'), detailRows );
+    if(tr.hasClass('child')) {
+        if (  tr.hasClass('details')){
+            tr.removeClass('details');
+            $('.detail_li').remove();
+        }else{
 
-    if ( row.child.isShown() ) {
-        tr.removeClass( 'details' );
-        row.child.hide();
+            tr.addClass('details');
+            var row_prev = dt.row(tr.prev());
+            var ul = tr.find('ul');
+            ul.append("<li class='detail_li'>" + format(row_prev.data(), name) + "</li>");
 
-        // Remove from the 'open' array
-        detailRows.splice( idx, 1 );
+        }
+
     }
     else {
-        tr.addClass( 'details' );
-        row.child( format( row.data(),name ) ).show();
 
-        // Add to the 'open' array
-        if ( idx === -1 ) {
-            detailRows.push( tr.attr('id') );
+        if (row.child.isShown()) {
+            tr.removeClass('details');
+            row.child.hide();
+        }
+        else {
+            tr.addClass('details');
+
+            console.log(row.child(format(row_prev.data(), name)).show());
+            console.log(row.child());
+            console.log(row_prev.child());
+
+            // Add to the 'open' array
+
         }
     }
 }
+
 
 var editor;
 var reportEditor;
@@ -50,6 +68,7 @@ $(function(){
     editor = new $.fn.dataTable.Editor( {
             "ajax": "ajax/posts",
             "table": "#example",
+
             "fields": [  {
                 "label": "Title:",
                 "name": "title"
@@ -109,8 +128,15 @@ $(function(){
     });
 
 
+
     //Tables
     var dt = $('#example').DataTable( {
+        responsive: {
+            details: {
+                type: 'column',
+                target: 'tr'
+            }
+        },
         dom: "frtip",
         ajax: {
             url: "ajax/posts",
@@ -118,6 +144,7 @@ $(function(){
         },
         serverSide: true,
         columns: [
+
             { data: "title" },
             { data: "date",
               searchable: false},
@@ -128,7 +155,7 @@ $(function(){
 
             {
                 data: null,
-                className: "center",
+                className: "center columnWrap",
                 searchable: false,
                 defaultContent: '<a href="" class="editor_edit btn btn-primary btn-sm tableEdit" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> ' +
                 '<a href=""  role="button" class="editor_remove btn btn-danger btn-sm tableEdit"><i class="fa fa-times" aria-hidden="true"></i></a> ' +
@@ -142,6 +169,11 @@ $(function(){
 
 
     var dtr = $('#reportsTable').DataTable( {
+        responsive: {
+            details: {
+                type: 'column'
+            }
+        },
         dom: "frtip",
         ajax: {
             url: "ajax/reports",
@@ -149,6 +181,7 @@ $(function(){
         },
         serverSide: true,
         columns: [
+
             { data: "title" },
             {
                 data: "text",
@@ -160,7 +193,9 @@ $(function(){
 
             {
                 data: null,
+
                 className: "center",
+
                 searchable: false,
                 defaultContent: '<a href=""  role="button" class="editor_remove btn btn-danger btn-sm tableEdit"><i class="fa fa-times" aria-hidden="true"></i></a> ' +
                 '<a href=""  role="button" class="details-control btn btn-success btn-sm tableEdit"><i class="fa fa-eye" aria-hidden="true"></i></a>'
