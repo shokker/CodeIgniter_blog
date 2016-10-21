@@ -1,7 +1,9 @@
-function format ( d ) {
-    return '<strong>Post Text:</strong><br>'+
+function format ( d ,name) {
+    return '<strong>'+name.toUpperCase()+' Text:</strong><br>'+
         d.text;
 }
+
+
 var editor;
 var reportEditor;
 // use a global for the submit and return data rendering in the examples
@@ -60,7 +62,6 @@ $(function(){
 
     $('#example').on( 'click', 'a.details-control', function (e) {
         e.preventDefault();
-        console.log('klikol');
         var tr = $(this).closest('tr');
         var row = dt.row( tr );
         var idx = $.inArray( tr.attr('id'), detailRows );
@@ -74,7 +75,31 @@ $(function(){
         }
         else {
             tr.addClass( 'details' );
-            row.child( format( row.data() ) ).show();
+            row.child( format( row.data(),'post' ) ).show();
+
+            // Add to the 'open' array
+            if ( idx === -1 ) {
+                detailRows.push( tr.attr('id') );
+            }
+        }
+    } );
+
+    $('#reportsTable').on( 'click', 'a.details-control', function (e) {
+        e.preventDefault();
+        var tr = $(this).closest('tr');
+        var row = dtr.row( tr );
+        var idx = $.inArray( tr.attr('id'), detailRows );
+
+        if ( row.child.isShown() ) {
+            tr.removeClass( 'details' );
+            row.child.hide();
+
+            // Remove from the 'open' array
+            detailRows.splice( idx, 1 );
+        }
+        else {
+            tr.addClass( 'details' );
+            row.child( format( row.data(),'email' ) ).show();
 
             // Add to the 'open' array
             if ( idx === -1 ) {
@@ -98,6 +123,7 @@ $(function(){
                     data: "text",
                     visible:false,
                     searchable: false},
+
                 {
                     data: null,
                     className: "center",
@@ -111,11 +137,16 @@ $(function(){
 
         } );
 
-    // reportEditor = new $.fn.dataTable.Editor( {
-    //     "ajax": "ajax/reports",
-    //     "table": "#reportsTable"
-    //
-    // } );
+    $('#reportsTable').on( 'click', 'a.editor_remove', function (e) {
+        e.preventDefault();
+
+        reportEditor
+            .title( 'Delete record' )
+            .message( "Are you sure you wish to delete this row?" )
+            .buttons( { "label": "Delete", "fn": function () { reportEditor.submit() } } )
+            .remove( $(this).closest('tr') );
+    } );
+
 
     reportEditor = new $.fn.dataTable.Editor( {
         "ajax": "ajax/reports",
@@ -124,8 +155,8 @@ $(function(){
     } );
 
 
-    $('#reportsTable').DataTable( {
-        dom: "Brtip",
+    var dtr = $('#reportsTable').DataTable( {
+        dom: "rtip",
         ajax: {
             url: "ajax/reports",
             type: "POST"
@@ -133,13 +164,22 @@ $(function(){
         serverSide: true,
         columns: [
             { data: "title" },
+            {
+                data: "text",
+                visible:false,
+                searchable: false},
             { data: "author" },
-            { data: "date" }
+            { data: "date" },
+
+            {
+                data: null,
+                className: "center",
+                defaultContent: '<a href=""  role="button" class="editor_remove btn btn-danger btn-sm tableEdit"><i class="fa fa-times" aria-hidden="true"></i></a> ' +
+                '<a href=""  role="button" class="details-control btn btn-success btn-sm tableEdit"><i class="fa fa-eye" aria-hidden="true"></i></a>'
+            }
         ],
-        select: true,
-        buttons: [
-            { extend: "remove", editor: reportEditor }
-        ]
+        select: true
+
     } );
 
 

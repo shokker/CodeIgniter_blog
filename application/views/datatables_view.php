@@ -14,7 +14,6 @@
     <tfoot>
     <tr>
         <th>Title</th>
-
         <th>Date</th>
         <th>Text</th>
         <th>Actions</th>
@@ -30,8 +29,10 @@
 
     <tr>
         <th>Title</th>
+        <th>Text</th>
         <th>Author</th>
         <th>Date</th>
+        <th>Actions</th>
 
 
     </tr>
@@ -39,8 +40,10 @@
     <tfoot>
     <tr>
         <th>Title</th>
+        <th>Text</th>
         <th>Author</th>
         <th>Date</th>
+        <th>Actions</th>
 
 
     </tr>
