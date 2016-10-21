@@ -41,7 +41,7 @@ function showDetailDT(dt,name,this$) {
         else {
             tr.addClass('details');
 
-            console.log(row.child(format(row_prev.data(), name)).show());
+            console.log(row.child(format(row_prev.data(), name),'detail-row').show());
             console.log(row.child());
             console.log(row_prev.child());
 

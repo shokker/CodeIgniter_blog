@@ -213,3 +213,13 @@ td.details-control {
     float: left;
     width: 60px;
 }
+.columnWrap{
+    white-space: nowrap;
+
+}
+ table .child{
+    background-color: #f4f4f4;
+}
+table .detail-row{
+    background-color: #f4f4f4;
+}
