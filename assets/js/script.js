@@ -20,7 +20,8 @@ function showDetailDT(dt,name,this$) {
     if(tr.hasClass('child')) {
         if (  tr.hasClass('details')){
             tr.removeClass('details');
-            $('.detail_li').remove();
+            var ul = tr.find('ul');
+            ul.find('.detail_li').remove();
         }else{
 
             tr.addClass('details');
