@@ -111,7 +111,7 @@ $(function(){
 
     //Tables
     var dt = $('#example').DataTable( {
-        dom: "rtip",
+        dom: "frtip",
         ajax: {
             url: "ajax/posts",
             type: "POST"
@@ -119,7 +119,8 @@ $(function(){
         serverSide: true,
         columns: [
             { data: "title" },
-            { data: "date" },
+            { data: "date",
+              searchable: false},
             {
                 data: "text",
                 visible:false,
@@ -128,6 +129,7 @@ $(function(){
             {
                 data: null,
                 className: "center",
+                searchable: false,
                 defaultContent: '<a href="" class="editor_edit btn btn-primary btn-sm tableEdit" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> ' +
                 '<a href=""  role="button" class="editor_remove btn btn-danger btn-sm tableEdit"><i class="fa fa-times" aria-hidden="true"></i></a> ' +
                 '<a href=""  role="button" class="details-control btn btn-success btn-sm tableEdit"><i class="fa fa-eye" aria-hidden="true"></i></a>'
@@ -140,7 +142,7 @@ $(function(){
 
 
     var dtr = $('#reportsTable').DataTable( {
-        dom: "rtip",
+        dom: "frtip",
         ajax: {
             url: "ajax/reports",
             type: "POST"
@@ -153,11 +155,13 @@ $(function(){
                 visible:false,
                 searchable: false},
             { data: "author" },
-            { data: "date" },
+            { data: "date",
+                searchable: false},
 
             {
                 data: null,
                 className: "center",
+                searchable: false,
                 defaultContent: '<a href=""  role="button" class="editor_remove btn btn-danger btn-sm tableEdit"><i class="fa fa-times" aria-hidden="true"></i></a> ' +
                 '<a href=""  role="button" class="details-control btn btn-success btn-sm tableEdit"><i class="fa fa-eye" aria-hidden="true"></i></a>'
             }
