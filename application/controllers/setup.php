@@ -16,7 +16,7 @@ class Setup extends CI_Controller {
 
         $this->data['title'] = 'Setup';
 
-      if($this->setup_model->createDbPostTable() && $this->setup_model->createReportsTable()){
+      if($this->setup_model->createDbPostTable() && $this->setup_model->createReportsTable() && $this->setup_model->createUsersTable()){
           $this->data['message'] = "tables loaded!";
           $this->template->view('setup_view', $this->data);
         }else {

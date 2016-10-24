@@ -65,6 +65,29 @@ class Setup_model extends CI_Model {
 
 
     }
+    public function createUsersTable()
+    {
+
+        $fields_users = array(
+            'id'=>array(
+                'type'=>'INT',
+                'constraint' => 11,
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
+            ),
+            'email'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'100'
+            ),
+            'password'=>array(
+                'type'=>'VARCHAR',
+                'constraint'=>100
+            )
+        );
+        return createTable($fields_users,'id','users');
+
+
+    }
 
 
 

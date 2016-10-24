@@ -172,7 +172,8 @@ $(function(){
     var dtr = $('#reportsTable').DataTable( {
         responsive: {
             details: {
-                type: 'column'
+                type: 'column',
+                target: 'tr'
             }
         },
         dom: "frtip",

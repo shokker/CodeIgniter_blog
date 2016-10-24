@@ -223,3 +223,10 @@ td.details-control {
 table .detail-row{
     background-color: #f4f4f4;
 }
+.auth_form{
+    width: 60%;
+    margin: 20px auto;
+}
+.auth_form .form-control{
+    margin-bottom: 15px;
+}
