@@ -29,7 +29,7 @@
         <?php if($this->session->userdata('avatar')) : ?>
             <img src="<?= base_url().$this->session->userdata('avatar')?>" alt="avatar">
         <?php else : ?>
-            <span class="empty_avatar"></span>
+            <span class="empty_avatar"><!-- --></span>
         <?php endif; ?>
 		<span class="email_auth"><?=$this->session->userdata('email') ?></span>
 		<?= anchor('auth/logout',"Logout") ?>

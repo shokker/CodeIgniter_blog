@@ -255,3 +255,12 @@ table .detail-row{
     margin-right: 20px;
 
 }
+.empty_avatar{
+    background-color: #b34c3c;
+    padding: 15px;
+    display: inline-block;
+    margin-right: 20px;
+    position: relative;
+   top: 7px;
+
+}

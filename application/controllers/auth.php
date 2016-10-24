@@ -46,6 +46,7 @@ class Auth extends CI_Controller {
 
     public function register()
     {
+        $avatar = array();
         $this->data['title'] = 'Register';
         $this->form_validation->set_rules('email','Email','required|valid_email|is_unique[users.email]')
             ->set_rules('password','Password','required|min_length[4]')
