@@ -77,11 +77,18 @@ class Setup_model extends CI_Model {
             ),
             'email'=>array(
                 'type' => 'VARCHAR',
-                'constraint'=>'100'
+                'constraint'=>'100',
+                'unique' => TRUE,
             ),
             'password'=>array(
                 'type'=>'VARCHAR',
                 'constraint'=>100
+            ),
+            'avatar'=>array(
+                'type'=>'VARCHAR',
+                'constraint'=>200,
+                'null'=>TRUE,
+                'default'=>NULL
             )
         );
         return createTable($fields_users,'id','users');

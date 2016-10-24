@@ -25,17 +25,19 @@
 <body>
 
 <div class="auth_panel">
-	<?php if(is_logged()) {
+	<?php if(is_logged()) : ?>
+        <?php if($this->session->userdata('avatar')) : ?>
+            <img src="<?= base_url().$this->session->userdata('avatar')?>" alt="avatar">
+        <?php else : ?>
+            <span class="empty_avatar"></span>
+        <?php endif; ?>
+		<span class="email_auth"><?=$this->session->userdata('email') ?></span>
+		<?= anchor('auth/logout',"Logout") ?>
+	<?php else :?>
+		<?= anchor('auth/login','Login') ?>
+	    <?= anchor('auth/register','Register') ?>
 
-		echo $this->session->userdata('email');
-		echo " ";
-		echo anchor('auth/logout',"Logout");
-	}else{
-		echo anchor('auth/login','Login');
-		echo " ";
-		echo anchor('auth/register','Register');
-
-	}; ?>
+	<?php endif; ?>
 
 </div>
 

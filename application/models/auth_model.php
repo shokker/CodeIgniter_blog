@@ -16,7 +16,7 @@ class Auth_model extends CI_Model {
 
     public function getUser($email)
     {
-        $query = $this->db->select('email','id')
+        $query = $this->db->select('email,id,avatar')
                           ->where('email',$email)
                           ->get('users');
         if($query->num_rows == 1){
@@ -26,12 +26,13 @@ class Auth_model extends CI_Model {
 
     }
 
-    public function register()
+    public function register($avatar = array())
     {
         $data = array(
             'email'=> $this->input->post('email'),
             'password'=> sha1($this->input->post('password'))
         );
+        $data += $avatar;
         $query = $this->db->insert('users',$data);
         return $query;
     }
@@ -39,7 +40,8 @@ class Auth_model extends CI_Model {
     public function logout()
     {
         $data = array('email'=>'',
-                      'logged_in'=>'');
+                      'logged_in'=>'',
+                      'avatar'=>'');
         $this->session->unset_userdata($data);
     }
 
