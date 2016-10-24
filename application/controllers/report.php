@@ -8,7 +8,7 @@ class Report extends CI_Controller {
         $this->load->model('report_model');
         $this->load->model('posts_model');
         $this->load->library('form_validation');
-        $this->load->helper('typography','url','my_helper');
+        $this->load->helper(array('typography','url','my_helper'));
         $this->data['report_form']='';
 
 

@@ -24,6 +24,21 @@
 
 <body>
 
+<div class="auth_panel">
+	<?php if(is_logged()) {
+
+		echo $this->session->userdata('email');
+		echo " ";
+		echo anchor('auth/logout',"Logout");
+	}else{
+		echo anchor('auth/login','Login');
+		echo " ";
+		echo anchor('auth/register','Register');
+
+	}; ?>
+
+</div>
+
 <div class="container">
 
 	<?= $content ?>

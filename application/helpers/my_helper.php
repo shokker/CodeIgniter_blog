@@ -23,4 +23,9 @@ if(! function_exists('createTable')){
         $array = explode(' ',trim(strtolower($title)));
         return implode('-',$array) . "-" . ($id+1);
     }
+    function is_logged(){
+        $CI =& get_instance();
+
+        return $CI->session->userdata('logged_in');
+    }
 }

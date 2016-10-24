@@ -5,7 +5,7 @@ class Auth extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper(array('url','form'));
+        $this->load->helper(array('url','form','my_helper'));
         $this->load->library('form_validation');
         $this->load->model('auth_model');
         $this->data['valid_error'] = '';
@@ -22,7 +22,10 @@ class Auth extends CI_Controller {
         if($this->form_validation->run()){
             if($this->auth_model->login()) {
 
-                echo "register and login";
+                $userData = $this->auth_model->getUser($this->input->post('email'));
+                $userData['logged_in'] = true;
+                $this->session->set_userdata($userData);
+
                 redirect('/');
             }
             else{
@@ -51,7 +54,7 @@ class Auth extends CI_Controller {
 
         if($this->form_validation->run() && $this->auth_model->register()){
 
-            echo "register and login";
+
 
             redirect('/');
 
@@ -61,6 +64,12 @@ class Auth extends CI_Controller {
 
         }
 
+    }
+
+    public function logout()
+    {
+        $this->auth_model->logout();
+        redirect('/');
     }
 
 

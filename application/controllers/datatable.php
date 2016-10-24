@@ -6,7 +6,7 @@ class Datatable extends CI_Controller {
     {
         parent::__construct();
         $this->load->library('EditorLib');
-        $this->load->helper('url');
+        $this->load->helper(array('url','my_helper'));
         $this->data['report_form'] = '';
     }
 
