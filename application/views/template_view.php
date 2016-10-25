@@ -32,6 +32,10 @@
             <span class="empty_avatar"><!-- --></span>
         <?php endif; ?>
 		<span class="email_auth"><?=$this->session->userdata('email') ?></span>
+		<span class="email_auth"><?=$this->session->userdata('role') ?></span>
+	<?php if($this->session->userdata('role')!= 'user') : ?>
+		<?= anchor('dashboard',"Dashboard") ?>
+		<?php endif; ?>
 		<?= anchor('auth/logout',"Logout") ?>
 	<?php else :?>
 		<?= anchor('auth/login','Login') ?>
@@ -54,7 +58,7 @@
 		<?php endif; ?>
 	<?php endif; ?>
 	<div class="footer-info">
-		Created by Lukáš Danko | <?php echo anchor('report','Reports') . " | " . anchor('datatable','DataTable'); ?>
+		Created by Lukáš Danko
 	</div>
 </footer>
 </div>

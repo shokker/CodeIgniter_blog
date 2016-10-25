@@ -26,6 +26,9 @@ class Auth extends CI_Controller {
                 $userData = $this->auth_model->getUser($this->input->post('email'));
                 $userData['logged_in'] = true;
                 $this->session->set_userdata($userData);
+                if($userData['role'] != 'user'){
+                    redirect('dashboard');
+                }
 
                 redirect('/');
             }

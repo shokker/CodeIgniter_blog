@@ -11,8 +11,7 @@ class Posts extends CI_Controller
         $this->load->helper(array('form', 'url', 'typography', 'my_helper'));
         $this->data['report_form'] ='';
         $this->data['db_error'] = '';
-//        print_r($this->session->all_userdata());
-//        die();
+
 
     }
 

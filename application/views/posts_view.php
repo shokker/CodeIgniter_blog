@@ -17,8 +17,5 @@
 
 
 <?php endforeach; ?>
-<div class="link">
-    <?php echo anchor('posts/add','Add post',array('class'=>'link_a')); ?>
-</div>
 </div>
 

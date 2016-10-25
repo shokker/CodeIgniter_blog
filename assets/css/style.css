@@ -271,5 +271,10 @@ table .detail-row{
     margin-right: 20px;
     position: relative;
    top: 7px;
-
+}
+.links{
+    width: 100%;
+    margin: 0 auto;
+    list-style-type: none;
+    display: inline-flex;
 }

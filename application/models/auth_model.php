@@ -17,11 +17,10 @@ class Auth_model extends CI_Model {
     public function getUser($email)
     {
 
-        //toto treba nejak vyriesit
         $this->db->select('web_path');
         $this->db->from('files');
         $this->db->join('users', 'avatar = files.id');
-        $query = $this->db->select('users.email,users.id,files.web_path')
+        $query = $this->db->select('users.email,users.id,files.web_path,users.role')
                           ->where('email',$email)
                           ->get();
         if($query->num_rows == 1){
@@ -35,7 +34,8 @@ class Auth_model extends CI_Model {
     {
         $data = array(
             'email'=> $this->input->post('email'),
-            'password'=> sha1($this->input->post('password'))
+            'password'=> sha1($this->input->post('password')),
+            'role'=>'user'
         );
         $data += $avatar;
         $query = $this->db->insert('users',$data);
