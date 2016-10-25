@@ -63,6 +63,7 @@
 
         <th>Email</th>
         <th>Image</th>
+        <th>Role</th>
 
 
 
@@ -75,6 +76,7 @@
 
         <th>Email</th>
         <th>Image</th>
+        <th>Role</th>
 
 
 

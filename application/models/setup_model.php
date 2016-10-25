@@ -87,7 +87,12 @@ class Setup_model extends CI_Model {
             'avatar'=>array(
                 'type'=>'VARCHAR',
                 'constraint'=>255,
-                'null'=>TRUE,
+                'null'=>TRUE
+
+            ),
+            'role'=>array(
+                'type'=>'VARCHAR',
+                'constraint'=>255
 
             )
         );

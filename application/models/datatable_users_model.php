@@ -34,6 +34,7 @@ class Datatable_users_model extends CI_Model {
                 Field::inst( 'password' )->validator( 'Validate::notEmpty' ),
                 Field::inst( 'avatar' )
                     ->setFormatter( 'Format::ifEmpty', null )
+                    // cesta CodeIgniter len koli localhoste
                     ->upload( Upload::inst( $_SERVER['DOCUMENT_ROOT'].'/CodeIgniter/images/__ID__.__EXTN__' )
                         ->db( 'files', 'id', array(
                             'filename'    => Upload::DB_FILE_NAME,
@@ -47,8 +48,20 @@ class Datatable_users_model extends CI_Model {
                                 null;
                         } )
                         ->allowedExtensions( [ 'png', 'jpg', 'gif' ], "Please upload an image" )
-                    )
+                    ),
+                Field::inst( 'role' )
             )
+                ->on('preCreate',function ($editor,$values){
+                    $editor
+                        ->field( 'password' )
+                        ->setValue( sha1($values['password']) );
+
+                })
+                ->on( 'preEdit', function ( $editor,$id,$values) {
+                    $editor
+                        ->field( 'password' )
+                        ->setValue( sha1($values['password']) );
+                })
 
             ->process( $post )
             ->json();

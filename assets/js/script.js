@@ -104,7 +104,18 @@ $(function(){
                 },
                 clearText: "Clear",
                 noImageText: 'No image'
-            }
+            },
+                {
+                    label: "Role:",
+                    name:  "role",
+                    type:  "select",
+                    options: [
+                        { label: "Admin", value: "admin" },
+                        { label: "Editor",value: "editor" },
+                        { label: "User",  value: "user" }
+
+                    ]
+                }
             ]
         } );
 
@@ -260,7 +271,9 @@ $(function(){
             },
                 defaultContent: "No image",
                 title: "Image"
-            }
+            },
+            {data: 'role'}
+
         ],
 
 
