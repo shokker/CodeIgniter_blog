@@ -16,9 +16,14 @@ class Auth_model extends CI_Model {
 
     public function getUser($email)
     {
-        $query = $this->db->select('email,id,avatar')
+
+        //toto treba nejak vyriesit
+        $this->db->select('web_path');
+        $this->db->from('files');
+        $this->db->join('users', 'avatar = files.id');
+        $query = $this->db->select('users.email,users.id,files.web_path')
                           ->where('email',$email)
-                          ->get('users');
+                          ->get();
         if($query->num_rows == 1){
             return $query->row_array();
         }
@@ -26,7 +31,7 @@ class Auth_model extends CI_Model {
 
     }
 
-    public function register($avatar = array())
+    public function register($avatar,$file_avatar)
     {
         $data = array(
             'email'=> $this->input->post('email'),
@@ -34,14 +39,17 @@ class Auth_model extends CI_Model {
         );
         $data += $avatar;
         $query = $this->db->insert('users',$data);
-        return $query;
+
+        $file_data = $file_avatar;
+        $query_file = $this->db->insert('files',$file_data);
+        return $query && $query_file;
     }
 
     public function logout()
     {
         $data = array('email'=>'',
                       'logged_in'=>'',
-                      'avatar'=>'');
+                      'web_path'=>'');
         $this->session->unset_userdata($data);
     }
 

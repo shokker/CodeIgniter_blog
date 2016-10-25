@@ -26,8 +26,8 @@
 
 <div class="auth_panel">
 	<?php if(is_logged()) : ?>
-        <?php if($this->session->userdata('avatar')) : ?>
-            <img src="<?= base_url().$this->session->userdata('avatar')?>" alt="avatar">
+        <?php if($this->session->userdata('web_path')) : ?>
+            <img src="<?= $this->session->userdata('web_path')?>" alt="avatar">
         <?php else : ?>
             <span class="empty_avatar"><!-- --></span>
         <?php endif; ?>

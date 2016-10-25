@@ -11,6 +11,9 @@ class Posts extends CI_Controller
         $this->load->helper(array('form', 'url', 'typography', 'my_helper'));
         $this->data['report_form'] ='';
         $this->data['db_error'] = '';
+//        print_r($this->session->all_userdata());
+//        die();
+
     }
 
     public function index()
@@ -53,7 +56,7 @@ class Posts extends CI_Controller
     public function showPost($url)
 
     {
-        print_r($url);
+
         $this->data['title'] = $this->posts_model->showPost($url)->title;
         $this->data['text'] = $this->posts_model->showPost($url)->text;
         $this->data['date'] = $this->posts_model->showPost($url)->date;

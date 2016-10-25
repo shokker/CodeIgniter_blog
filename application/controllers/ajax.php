@@ -18,5 +18,10 @@ class Ajax extends CI_Controller {
         $this->editorlib->process($_POST,'datatable_reports_model');
     }
 
+    public function users()
+    {
+        $this->editorlib->process($_POST,'datatable_users_model');
+    }
+
 
 }

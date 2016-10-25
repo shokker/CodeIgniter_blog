@@ -54,11 +54,13 @@ function showDetailDT(dt,name,this$) {
 
 var editor;
 var reportEditor;
+var usersEditor;
 var detailRows = [];
 // use a global for the submit and return data rendering in the examples
 
 
 $(function(){
+
 
     $('.warning').click(function () {
        $(this).fadeOut();
@@ -77,6 +79,31 @@ $(function(){
                 "label": "Text:",
                 "type": "textarea",
                 "name": "text"
+            }
+            ]
+        } );
+
+    usersEditor = new $.fn.dataTable.Editor( {
+            "ajax": "ajax/users",
+            "table": "#usersTable",
+
+            "fields": [  {
+                "label": "Email:",
+                "name": "email"
+            },  {
+                "label": "Password:",
+                "type": "password",
+                "name": "password"
+            }, {
+                label: "Image:",
+                name: "avatar",
+                type: "upload",
+                display: function ( file_id ) {
+                    return '<img src="'+dtu.file( 'files', file_id ).web_path+'"/>';
+
+                },
+                clearText: "Clear",
+                noImageText: 'No image'
             }
             ]
         } );
@@ -204,6 +231,46 @@ $(function(){
             }
         ],
         select: true
+
+    } );
+
+
+    var dtu = $('#usersTable').DataTable( {
+        responsive: {
+            details: {
+                type: 'column',
+                target: 'tr'
+            }
+        },
+        dom: "Bfrtip",
+        ajax: {
+            url: "ajax/users",
+            type: "POST"
+        },
+        serverSide: true,
+        columns: [
+
+            { data: "email" },
+            {
+            data: "avatar",
+                render: function ( file_id ) {
+                return file_id ?
+                 '<img src="'+dtu.file( 'files', file_id ).web_path+'" class="table-img"/>':
+                    null;
+            },
+                defaultContent: "No image",
+                title: "Image"
+            }
+        ],
+
+
+
+        select: true,
+        buttons: [
+            { extend: "create", editor: usersEditor },
+            { extend: "edit",   editor: usersEditor },
+            { extend: "remove", editor: usersEditor }
+        ]
 
     } );
 

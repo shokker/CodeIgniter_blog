@@ -11,6 +11,7 @@ class Auth extends CI_Controller {
         $this->data['valid_error'] = '';
         $this->data['report_form'] = '';
 
+
     }
 
     public function login(){
@@ -47,6 +48,7 @@ class Auth extends CI_Controller {
     public function register()
     {
         $avatar = array();
+        $avatar_file= array();
         $this->data['title'] = 'Register';
         $this->form_validation->set_rules('email','Email','required|valid_email|is_unique[users.email]')
             ->set_rules('password','Password','required|min_length[4]')
@@ -59,7 +61,8 @@ class Auth extends CI_Controller {
         if($this->form_validation->run()) {
             if($_FILES['file']['tmp_name']) {
                 if ($ok=$this->_avatarUpload()) {
-                    $avatar = $ok;
+                    $avatar = $ok[0];
+                    $avatar_file = $ok[1];
 
 
                 } else {
@@ -68,10 +71,11 @@ class Auth extends CI_Controller {
                 }
 
             }
-            if ($this->auth_model->register($avatar)) {
+            if ($this->auth_model->register($avatar,$avatar_file)) {
                 $userData = $this->auth_model->getUser($this->input->post('email'));
                 $userData['logged_in'] = true;
                 $this->session->set_userdata($userData);
+
                 redirect('/');
 
             }
@@ -91,40 +95,27 @@ class Auth extends CI_Controller {
 
     public function _avatarUpload()
     {
+        $id = $this->db->select_max('id')->get('files')->row()->id;
 
         $config['upload_path'] = './images/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size']	= '100';
-        $config['max_width']  = '300';
-        $config['max_height']  = '300';
-        $config['encrypt_name']  = TRUE;
+        $config['overwrite']	= TRUE;
+        $config['file_name'] = $id +1;
         $this->load->library('upload',$config);
         if($this->upload->do_upload('file')){
             $data = $this->upload->data();
-            if($this->_createAvatar($data)){
-                return array('avatar'=>"/images/".$data['file_name']);
+            return array(array('avatar'=>$id +1),array('filename'=>$data['file_name'],
+                                                       'filezise'=>$data['file_size'],
+                                                       'system_path'=>$data['full_path'],
+                                                        // plati len pre localhost
+                                                       'web_path'=>'/CodeIgniter/images/'.$data['file_name'],)
+                );
             }
-
-        }
         return false;
     }
 
-    public function _createAvatar($data)
-    {
-        $config['image_library'] = 'gd2';
-        $config['source_image']	= $data['full_path'];
-        $config['maintain_ratio'] = TRUE;
-        $config['width']	= 30;
-        $config['height']	= 30;
 
-        $this->load->library('image_lib', $config);
-
-        if($this->image_lib->resize()){
-            return true;
-        }
-        return false;
-
-    }
 
 
 }
