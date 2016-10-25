@@ -49,6 +49,7 @@ class Auth_model extends CI_Model {
     {
         $data = array('email'=>'',
                       'logged_in'=>'',
+                      'role'=>'',
                       'web_path'=>'');
         $this->session->unset_userdata($data);
     }
