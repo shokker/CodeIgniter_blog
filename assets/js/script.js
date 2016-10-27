@@ -55,6 +55,7 @@ function showDetailDT(dt,name,this$) {
 var editor;
 var reportEditor;
 var usersEditor;
+var usersEditorEdit;
 var detailRows = [];
 // use a global for the submit and return data rendering in the examples
 
@@ -95,6 +96,34 @@ $(function(){
                 "type": "password",
                 "name": "password"
             }, {
+                label: "Image:",
+                name: "avatar",
+                type: "upload",
+                display: function ( file_id ) {
+                    return '<img src="'+dtu.file( 'files', file_id ).web_path+'"/>';
+
+                },
+                clearText: "Clear",
+                noImageText: 'No image'
+            },
+                {
+                    label: "Role:",
+                    name:  "role",
+                    type:  "select",
+                    options: [
+                        { label: "Admin", value: "admin" },
+                        { label: "Editor",value: "editor" },
+                        { label: "User",  value: "user" }
+
+                    ]
+                }
+            ]
+        } );
+    usersEditorEdit = new $.fn.dataTable.Editor( {
+            "ajax": "ajax/users",
+            "table": "#usersTable",
+
+            "fields": [ {
                 label: "Image:",
                 name: "avatar",
                 type: "upload",
@@ -281,7 +310,7 @@ $(function(){
         select: true,
         buttons: [
             { extend: "create", editor: usersEditor },
-            { extend: "edit",   editor: usersEditor },
+            { extend: "edit",   editor: usersEditorEdit },
             { extend: "remove", editor: usersEditor }
         ]
 

@@ -17,12 +17,27 @@ class Auth_model extends CI_Model {
     public function getUser($email)
     {
 
-        $this->db->select('web_path');
-        $this->db->from('files');
-        $this->db->join('users', 'avatar = files.id');
-        $query = $this->db->select('users.email,users.id,files.web_path,users.role')
-                          ->where('email',$email)
-                          ->get();
+//        vybereme webpath z files a pripojime ho k userovi
+//    ale co ak avatar je null ??
+//
+
+        $query = $this->db->query("SELECT 
+                                  users.id,users.email,users.role,files.web_path
+                                  FROM files 
+                                  RIGHT JOIN users 
+                                  ON users.avatar  = files.id
+                                  WHERE users.email ='$email'");
+
+
+
+
+
+
+//        $this->db->from('files');
+//        $this->db->join('users', 'avatar = files.id');
+//        $query = $this->db->select('users.email,users.id,files.web_path,users.role')
+//                          ->where('email',$email)
+//                          ->get();
         if($query->num_rows == 1){
             return $query->row_array();
         }
