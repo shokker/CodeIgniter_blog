@@ -4,7 +4,7 @@ function format ( d ,name) {
 }
 function removeDT(editor,DT) {
     editor
-        .title( 'Delete record' )
+           .title( 'Delete record' )
         .message( "Are you sure you wish to delete this row?" )
         .buttons( { "label": "Delete", "fn": function () { editor.submit() } } )
         .remove( DT.closest('tr') );
@@ -50,7 +50,6 @@ function showDetailDT(dt,name,this$) {
         }
     }
 }
-
 
 var editor;
 var reportEditor;
