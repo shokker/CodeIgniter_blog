@@ -2,6 +2,9 @@
 
 <h1>XML</h1>
 
+ <div class="link_report">
+<?php echo anchor('view_xml/upload/','Upload',array('class'=>'link_report_a')); ?>
+</div>
 <?php foreach ($xml->children() as $node) : ?>
 
     <div class="post">
