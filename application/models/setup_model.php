@@ -137,6 +137,42 @@ class Setup_model extends CI_Model {
 
 
     }
+     public function createFilesXmlTable()
+    {
+
+        $fields_files = array(
+            'id'=>array(
+                'type'=>'INT',
+                'constraint' => 11,
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
+            ),
+            'filename'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+            'filezise'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+            'web_path'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+            'system_path'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+
+        );
+        return createTable($fields_files,'id','filesXML');
+
+
+    }
 
 
 

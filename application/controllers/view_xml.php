@@ -5,7 +5,7 @@ class View_xml extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('posts_model');
+        $this->load->model('view_xml_model');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url', 'typography', 'my_helper'));
         $this->data['report_form'] ='';
@@ -17,7 +17,10 @@ class View_xml extends CI_Controller {
     public function index(){
 
         $this->data['title'] = 'XML';
-        $this->data['xml'] = simplexml_load_file('assets/test.xml');
+        $this->data['xmls'] = $this->view_xml_model->get();
+
+
+        //$this->data['xml'] = simplexml_load_file('assets/test.xml');
         $this->template->view('view_xml_view',$this->data);
     }
 
@@ -54,9 +57,11 @@ class View_xml extends CI_Controller {
 
             $this->data['title'] = 'XML Upload';
             if($_FILES['file']['tmp_name']) {
-                if ($ok=$this->_avatarUpload()) {
+                if ($ok=$this->_xmlUpload()) {
                     $xml = $ok[0];
                     $xml_file = $ok[1];
+                    $this->view_xml_model->do_upload($xml_file);
+                    redirect('/');
 
 
                 } else {
@@ -64,8 +69,9 @@ class View_xml extends CI_Controller {
                     return $this->template->view('xml_upload_view',$this->data);
                 }
             }
+
     }
-    public function _avatarUpload()
+    public function _xmlUpload()
     {
         $id = $this->db->select_max('id')->get('files')->row()->id;
 
@@ -81,7 +87,7 @@ class View_xml extends CI_Controller {
                                                        'filezise'=>$data['file_size'],
                                                        'system_path'=>$data['full_path'],
                                                         // plati len pre localhost
-                                                       'web_path'=>'/Codeigniter/images/'.$data['file_name'])
+                                                       'web_path'=>'/codeigniter/xml/'.$data['file_name'])
                 );
             }
         return false;
