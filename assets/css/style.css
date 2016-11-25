@@ -107,6 +107,40 @@ footer{
 .report_form .form-control:first-child{
     margin-right: 2%;
 }
+
+.header_form{
+
+    width: 100%;
+    display: block;
+}
+.header_form_min{
+    width: 5%;
+}
+fieldset legend{
+    border: 0;
+    margin:0;
+}
+.inner_label{
+    margin-left: 5%;
+}
+.d_inner_label{
+    margin-left: 10%;
+}
+.new_item{
+    font-weight: bold;
+    color: #cc3a1c;
+}
+.no_used_item{
+    font-weight: bold;
+    color: #535975;
+}
+.inner_input{
+    margin-left: 5%;
+    width: 95%;
+}.d_inner_input{
+    margin-left: 10%;
+    width: 90%;
+}
 #report_textarea{
     margin-top: 20px;
     display: block;

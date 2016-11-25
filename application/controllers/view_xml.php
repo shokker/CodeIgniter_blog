@@ -18,32 +18,46 @@ class View_xml extends CI_Controller {
 
         $this->data['title'] = 'XML';
         $this->data['xmls'] = $this->view_xml_model->get();
+        $this->data['xml_directory'] = 'xml_edit';
 
 
         //$this->data['xml'] = simplexml_load_file('assets/test.xml');
         $this->template->view('view_xml_view',$this->data);
     }
 
-    public function edit_xml($id)
+    public function edit_xml($file)
     {
-        $this->form_validation->set_rules('todo', 'Todo', 'required|')
-            ->set_rules('body', 'Body', 'required|')
-            ->set_rules('from', 'From', 'required|');
-        if($this->form_validation->run()){
-            $xml =  simplexml_load_file('assets/test.xml');
-            $xml->note[intval($id)]->todo = $this->input->post('todo');
-            $xml->note[intval($id)]->body = $this->input->post('body');
-            $xml->note[intval($id)]->from = $this->input->post('from');
+        $this->data['title'] = 'EDIT';
+            $this->data['source'] = $file;
+            $this->data['xml'] = $this->view_xml_model->xml2array('xml/'.$file);
 
-            $xml->asXML('assets/test.xml');
-            redirect('view_xml');
+            $this->template->view('xml_edit_experiment_view', $this->data);
+    }
+
+    public function edit_proceed_xml($xml)
+    {
+        $xml_file =  simplexml_load_file('xml/'.$xml);
+        $var='';
+        foreach ($_POST as $key=>$value){
+            $temp_array = explode('_',$key);
+            for($i = 0 ; $i<count($temp_array);$i++){
+                if($i==0) {
+                    $var = $xml_file->$temp_array[$i];
+                }
+                elseif($i==count($temp_array)-1) {
+                    $var->$temp_array[$i] = $value;
+                    $var = $var->$temp_array[$i];
+                }
+                else{
+                    $var = $var->$temp_array[$i];
+                }
+            }
+
         }
-        else {
-            $this->data['title'] = 'EDIT';
-            $this->data['xml'] = simplexml_load_file('assets/test.xml');
-            $this->data['id'] = $id;
-            $this->template->view('xml_edit_view', $this->data);
-        }
+        var_dump($xml_file);
+        $xml_file->asXML('xml_edit/test-'.$xml);
+        redirect('xml_view');
+
     }
     public function upload(){
         $this->data['title'] = 'XML Upload';
@@ -79,7 +93,6 @@ class View_xml extends CI_Controller {
         $config['allowed_types'] = 'xml';
         $config['max_size'] = '100';
         $config['overwrite']    = TRUE;
-        $config['file_name'] = $id +1;
         $this->load->library('upload',$config);
         if($this->upload->do_upload('file')){
             $data = $this->upload->data();
@@ -87,7 +100,7 @@ class View_xml extends CI_Controller {
                                                        'filezise'=>$data['file_size'],
                                                        'system_path'=>$data['full_path'],
                                                         // plati len pre localhost
-                                                       'web_path'=>'/codeigniter/xml/'.$data['file_name'])
+                                                       'web_path'=>'/xml/'.$data['file_name'])
                 );
             }
         return false;
