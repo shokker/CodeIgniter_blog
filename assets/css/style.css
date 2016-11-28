@@ -312,3 +312,6 @@ table .detail-row{
     list-style-type: none;
     display: inline-flex;
 }
+.mar_bottom{
+    margin-bottom: 60px;
+}

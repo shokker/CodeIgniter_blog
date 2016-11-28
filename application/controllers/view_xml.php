@@ -40,30 +40,26 @@ class View_xml extends CI_Controller {
         $xml_file =  simplexml_load_file('xml/'.$xml);
         $var='';
         foreach ($_POST as $key=>$value){
-            $temp_array = explode('_',$key);
-            for($i = 0 ; $i<count($temp_array);$i++){
-                $temp_array[$i] = explode(':',$temp_array[$i]);
-                $id = intval(array_pop($temp_array[$i]));
-                $temp_array[$i] = $temp_array[$i][0];
+            if($key!='submit') {
+                $temp_array = explode('_', $key);
+                for ($i = 0; $i < count($temp_array); $i++) {
+                    $temp_array[$i] = explode(':', $temp_array[$i]);
+                    $id = intval(array_pop($temp_array[$i]));
+                    $temp_string = $temp_array[$i][0];
 
-                if($i==0) {
-                    $var = $xml_file->$temp_array[$i][$id];
-//                    print_r($xml_file->$temp_array[$i]);
-//                    print_r($var);
-                }
-                elseif($i==count($temp_array)-1) {
-                    print_r($xml_file->$temp_array[$i][$id]);
-                    $xml_file->$temp_array[$i][$id] = $value;
-                    $var = $var->$temp_array[$i];
-                }
-                else{
-                    $var = $var->$temp_array[$i][$id];
+                    if ($i == 0) {
+                        $var = $xml_file->{$temp_string}[$id];
+                    } elseif ($i == count($temp_array) - 1) {
+                        $var->{$temp_string} = $value;
+                    } else {
+                        $var = $var->{$temp_string}[$id];
+                    }
                 }
             }
 
         }
+        print_r('vyplul som toto ');
         $xml_file->asXML('xml_edit/test-'.$xml);
-        die();
         redirect('view_xml');
 
     }
