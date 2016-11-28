@@ -36,27 +36,35 @@ class View_xml extends CI_Controller {
 
     public function edit_proceed_xml($xml)
     {
+        print_r($_POST);
         $xml_file =  simplexml_load_file('xml/'.$xml);
         $var='';
         foreach ($_POST as $key=>$value){
             $temp_array = explode('_',$key);
             for($i = 0 ; $i<count($temp_array);$i++){
+                $temp_array[$i] = explode(':',$temp_array[$i]);
+                $id = intval(array_pop($temp_array[$i]));
+                $temp_array[$i] = $temp_array[$i][0];
+
                 if($i==0) {
-                    $var = $xml_file->$temp_array[$i];
+                    $var = $xml_file->$temp_array[$i][$id];
+//                    print_r($xml_file->$temp_array[$i]);
+//                    print_r($var);
                 }
                 elseif($i==count($temp_array)-1) {
-                    $var->$temp_array[$i] = $value;
+                    print_r($xml_file->$temp_array[$i][$id]);
+                    $xml_file->$temp_array[$i][$id] = $value;
                     $var = $var->$temp_array[$i];
                 }
                 else{
-                    $var = $var->$temp_array[$i];
+                    $var = $var->$temp_array[$i][$id];
                 }
             }
 
         }
-        var_dump($xml_file);
         $xml_file->asXML('xml_edit/test-'.$xml);
-        redirect('xml_view');
+        die();
+        redirect('view_xml');
 
     }
     public function upload(){
