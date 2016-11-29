@@ -11,6 +11,7 @@
         <div class="post">
         <div class="post_header">
          <h3><?= anchor('/view_xml/edit_xml/'. $xml->filename, $xml->filename) ?></h3>
+            <?= anchor('/view_xml/delete/'. $xml->filename, 'delete') ?>
         </div>
         </div>
 

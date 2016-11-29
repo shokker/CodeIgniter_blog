@@ -58,10 +58,15 @@ class View_xml extends CI_Controller {
             }
 
         }
-        print_r('vyplul som toto ');
         $xml_file->asXML('xml_edit/test-'.$xml);
         redirect('view_xml');
 
+    }
+
+    public function delete($filename)
+    {
+        $this->view_xml_model->delete($filename);
+        redirect('view_xml');
     }
     public function upload(){
         $this->data['title'] = 'XML Upload';

@@ -72,6 +72,13 @@ class View_xml_model extends CI_Model {
             return $this->output;
     }
 
+    public function delete($filename)
+    {
+        unlink('./xml/'.$filename);
+        $this->db->where('filename', $filename);
+        $this->db->delete('filesXML');
+    }
+
 
 
 }
