@@ -36,29 +36,19 @@ class View_xml extends CI_Controller {
 
     public function edit_proceed_xml($xml)
     {
-        print_r($_POST);
-        $xml_file =  simplexml_load_file('xml/'.$xml);
-        $var='';
-        foreach ($_POST as $key=>$value){
-            if($key!='submit') {
-                $temp_array = explode('_', $key);
-                for ($i = 0; $i < count($temp_array); $i++) {
-                    $temp_array[$i] = explode(':', $temp_array[$i]);
-                    $id = intval(array_pop($temp_array[$i]));
-                    $temp_string = $temp_array[$i][0];
 
-                    if ($i == 0) {
-                        $var = $xml_file->{$temp_string}[$id];
-                    } elseif ($i == count($temp_array) - 1) {
-                        $var->{$temp_string} = $value;
-                    } else {
-                        $var = $var->{$temp_string}[$id];
-                    }
-                }
-            }
-
+        if (isset($_POST['database'])){
+            $this->view_xml_model->xml_database();
         }
-        $xml_file->asXML('xml_edit/test-'.$xml);
+        else{
+            $edited_xml= $this->view_xml_model->process($xml);
+
+            if (isset($_POST['save'])) {
+                    $this->view_xml_model->download($xml);
+                    die();
+            }
+        }
+        die();
         redirect('view_xml');
 
     }

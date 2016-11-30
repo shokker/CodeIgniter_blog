@@ -315,3 +315,7 @@ table .detail-row{
 .mar_bottom{
     margin-bottom: 60px;
 }
+#toolbar .wrapper {
+    background-color: transparent;
+    text-align: center;
+}

@@ -79,6 +79,46 @@ class View_xml_model extends CI_Model {
         $this->db->delete('filesXML');
     }
 
+    public function process($xml)
+    {
+        $count = count($_POST);
+        $xml_file =  simplexml_load_file('xml/'.$xml);
+        $var='';
+        foreach ($_POST as $key=>$value){
+            if (--$count <= 0) {
+                break;
+            }
+                $temp_array = explode('_', $key);
+                for ($i = 0; $i < count($temp_array); $i++) {
+                    $temp_array[$i] = explode(':', $temp_array[$i]);
+                    $id = intval(array_pop($temp_array[$i]));
+                    $temp_string = $temp_array[$i][0];
+
+                    if ($i == 0) {
+                        $var = $xml_file->{$temp_string}[$id];
+                    } elseif ($i == count($temp_array) - 1) {
+                        $var->{$temp_string} = $value;
+                    } else {
+                        $var = $var->{$temp_string}[$id];
+                    }
+            }
+
+        }
+       return $xml_file->asXML('xml_edit/test-'.$xml);
+    }
+
+    public function download($xml)
+    {
+        header('Content-type: text/xml');
+        header('Content-Disposition: attachment; filename="text.xml"');
+//output the XML data
+        echo  readfile($_SERVER['DOCUMENT_ROOT'].'/xml_edit/test-'.$xml);
+        //return $xml_file->asXML('xml_edit/test-'.$xml);
+        // if you want to directly download then set expires time
+        header("Expires: 0");
+
+    }
+
 
 
 }
