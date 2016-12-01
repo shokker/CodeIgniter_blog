@@ -1,6 +1,8 @@
 <h1>EXPeRiMENt</h1>
 
 <?= form_open('view_xml/edit_proceed_xml/'.$source); ?>
+<?= form_label('name of file', 'filename'); ?>
+<?= form_input('filename','','placeholder="file name" class="form-control header_form" id="filename"'); ?>
 <?= join($xml); ?>
 <div id='toolbar'>
     <div class='wrapper text-center'>

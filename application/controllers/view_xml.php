@@ -45,10 +45,10 @@ class View_xml extends CI_Controller {
 
             if (isset($_POST['save'])) {
                     $this->view_xml_model->download($xml);
-                    die();
+
             }
         }
-        die();
+
         redirect('view_xml');
 
     }

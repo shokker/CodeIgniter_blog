@@ -85,7 +85,7 @@ class View_xml_model extends CI_Model {
         $xml_file =  simplexml_load_file('xml/'.$xml);
         $var='';
         foreach ($_POST as $key=>$value){
-            if (--$count <= 0) {
+            if (--$count <= 0 || $key == 'filename' ) {
                 break;
             }
                 $temp_array = explode('_', $key);
@@ -110,12 +110,18 @@ class View_xml_model extends CI_Model {
     public function download($xml)
     {
         header('Content-type: text/xml');
+        if($_POST['filename']!= ''){
+            header('Content-Disposition: attachment; filename='.$_POST['filename'].'.xml');
+        }
+        else{
         header('Content-Disposition: attachment; filename="text.xml"');
+        }
 //output the XML data
         echo  readfile($_SERVER['DOCUMENT_ROOT'].'/xml_edit/test-'.$xml);
         //return $xml_file->asXML('xml_edit/test-'.$xml);
         // if you want to directly download then set expires time
         header("Expires: 0");
+        die();
 
     }
 
@@ -148,7 +154,6 @@ class View_xml_model extends CI_Model {
             print_r('<br>');
         }
         print_r($db_array);
-        die();
     }
 
 }
