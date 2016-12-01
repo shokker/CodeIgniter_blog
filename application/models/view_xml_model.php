@@ -119,6 +119,36 @@ class View_xml_model extends CI_Model {
 
     }
 
-
+    public function xml_database()
+    {
+        $default = 0;
+        $db_array = [];
+        $count = count($_POST);
+        foreach ($_POST as $key=>$value){
+            if (--$count <= 0) {
+                break;
+            }
+            if(strpos($key, 'CdtTrfTxInf')){
+                $temp_array = explode('_',$key);
+                $temp_key = explode(':',$temp_array[2]);
+                $temp_key =intval(array_pop($temp_key));
+                $last_key = array_pop($temp_array);
+                $last_key = explode(':',$last_key);
+//                print_r($temp_key.', '. $last_key);
+                if($default == $temp_key){
+                    $db_array[$last_key[0]] = $value;
+                }
+                else {
+                    $default = $temp_key;
+                    $this->db->insert('CdtTrfTxInf', $db_array);
+                    $db_array = [];
+                    $db_array[$last_key[0]] = $value;
+                }
+            }
+            print_r('<br>');
+        }
+        print_r($db_array);
+        die();
+    }
 
 }

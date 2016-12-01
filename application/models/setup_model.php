@@ -173,6 +173,57 @@ class Setup_model extends CI_Model {
 
 
     }
+    public function createCdtTrfTxInfTable()
+    {
+
+        $fields_CdtTrfTxInf = array(
+            'id'=>array(
+                'type'=>'INT',
+                'constraint' => 11,
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
+            ),
+            'EndToEndId'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+            'InstdAmt'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+            'BIC'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+            'Nm'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+            'BICOrBEI'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+            'IBAN'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+            'Ustrd'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+
+        );
+        return createTable($fields_CdtTrfTxInf,'id','CdtTrfTxInf');
+
+
+    }
 
 
 
