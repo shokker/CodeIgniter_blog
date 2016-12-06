@@ -24,13 +24,18 @@ class View_xml_model extends CI_Model {
         $sql = $this->db->get('filesXML');
         return $sql->result();    
     }
+    public function get_edit(){
+
+        $sql = $this->db->get('FilesXmlEdit');
+        return $sql->result();
+    }
 
 
-        function xml2array($fname){
+        public function xml2array($fname){
             $sxi = new SimpleXmlIterator($fname, null, true);
             return $this->sxiToArray($sxi);
         }
-        function sxiToArray($sxi){
+        public function sxiToArray($sxi){
 
 
 
@@ -81,12 +86,17 @@ class View_xml_model extends CI_Model {
 
     public function process($xml)
     {
-        $count = count($_POST);
+
         $xml_file =  simplexml_load_file('xml/'.$xml);
         $var='';
+        $count = count($_POST);
         foreach ($_POST as $key=>$value){
-            if (--$count <= 0 || $key == 'filename' ) {
+            if(--$count<=0){
                 break;
+            }
+
+            if($key == 'filename' || $key=='submit'){
+                continue;
             }
                 $temp_array = explode('_', $key);
                 for ($i = 0; $i < count($temp_array); $i++) {
@@ -104,20 +114,31 @@ class View_xml_model extends CI_Model {
             }
 
         }
-       return $xml_file->asXML('xml_edit/test-'.$xml);
+        //$xml povodny nazov filu
+
+        $xmlfile = time().'.xml';
+        $xml_file->asXML('xml_edit/test-'.$xmlfile);
+        $array = array('filename'=>$xml,'server_name'=>$xmlfile);
+        $this->db->insert('FilesXmlEdit',$array);
+        return $xmlfile;
     }
 
-    public function download($xml)
+    public function download($xml,$filename)
     {
-        header('Content-type: text/xml');
+
+        header('Content-type: text/xml; charset=utf-8');
         if($_POST['filename']!= ''){
             header('Content-Disposition: attachment; filename='.$_POST['filename'].'.xml');
         }
-        else{
-        header('Content-Disposition: attachment; filename="text.xml"');
+        else {
+            // furt to iste $xml ako hore
+            // tu v pohode nazov aj s diakritikou
+            header('Content-Disposition: attachment; filename='.$xml);
         }
+
 //output the XML data
-        echo  readfile($_SERVER['DOCUMENT_ROOT'].'/xml_edit/test-'.$xml);
+        /// a tu uz nie !!!!!!!!!
+        readfile($_SERVER['DOCUMENT_ROOT'].'/xml_edit/test-'.$filename);
         //return $xml_file->asXML('xml_edit/test-'.$xml);
         // if you want to directly download then set expires time
         header("Expires: 0");
@@ -125,14 +146,13 @@ class View_xml_model extends CI_Model {
 
     }
 
-    public function xml_database()
+    public function xml_database($post)
     {
         $default = 0;
         $db_array = [];
-        $count = count($_POST);
-        foreach ($_POST as $key=>$value){
-            if (--$count <= 0) {
-                break;
+        foreach ($post as $key=>$value){
+            if($key == 'filename' || $key=='submit'){
+                continue;
             }
             if(strpos($key, 'CdtTrfTxInf')){
                 $temp_array = explode('_',$key);
@@ -140,7 +160,7 @@ class View_xml_model extends CI_Model {
                 $temp_key =intval(array_pop($temp_key));
                 $last_key = array_pop($temp_array);
                 $last_key = explode(':',$last_key);
-//                print_r($temp_key.', '. $last_key);
+                var_dump($temp_key.', '. $last_key[0]);
                 if($default == $temp_key){
                     $db_array[$last_key[0]] = $value;
                 }
@@ -154,6 +174,8 @@ class View_xml_model extends CI_Model {
             print_r('<br>');
         }
         print_r($db_array);
+        $this->db->insert('CdtTrfTxInf', $db_array);
     }
+
 
 }

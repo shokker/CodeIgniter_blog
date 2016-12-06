@@ -12,14 +12,27 @@
 	<link href="<?= base_url()?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
 
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css"/>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.0/css/select.bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/css/editor.dataTables.min.css">
-	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/css/editor.bootstrap.min.css">
+<!--	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"/>-->
+<!--	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css"/>-->
+<!--	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css"/>-->
+<!--	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.0/css/select.bootstrap.min.css"/>-->
+<!--	<link rel="stylesheet" type="text/css" href="--><?//= base_url()?><!--assets/css/editor.dataTables.min.css">-->
+<!--	<link rel="stylesheet" type="text/css" href="--><?//= base_url()?><!--assets/css/editor.bootstrap.min.css">-->
 
 	<link href="<?= base_url()?>assets/css/style.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<!--	<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js" type="text/javascript"></script>-->
+<!--	<script src="https://cdn.datatables.net/buttons/1.1.0/js/dataTables.buttons.min.js" type="text/javascript"></script>-->
+<!--	<script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js" type="text/javascript"></script>-->
+<!--	<script src="https://cdn.datatables.net/select/1.1.0/js/dataTables.select.min.js" type="text/javascript"></script>-->
+<!--	<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>-->
+<!--	<script src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.bootstrap.min.js" type="text/javascript"></script>-->
+<!--	<script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js" type="text/javascript"></script>-->
+<!--	<script type="text/javascript" src="--><?//= base_url()?><!--assets/js/dataTables.editor.js"></script>-->
+<!--	<script src="--><?//= base_url()?><!--assets/js/editor.bootstrap.min.js"></script>-->
+	<script src="<?= base_url()?>assets/bootstrap/js/bootstrap.min.js"></script>
+<!--	<script src="--><?//= base_url()?><!--assets/js/script.js"></script>-->
 </head>
 
 <body>
@@ -64,16 +77,5 @@
 </div>
 
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="https://cdn.datatables.net/buttons/1.1.0/js/dataTables.buttons.min.js" type="text/javascript"></script>
-<script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js" type="text/javascript"></script>
-<script src="https://cdn.datatables.net/select/1.1.0/js/dataTables.select.min.js" type="text/javascript"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.bootstrap.min.js" type="text/javascript"></script>
-<script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php echo base_url()?>assets/js/dataTables.editor.js"></script>
-<script src="<?= base_url()?>assets/js/editor.bootstrap.min.js"></script>
-<script src="<?= base_url()?>assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?= base_url()?>assets/js/script.js"></script>
+
 </html>

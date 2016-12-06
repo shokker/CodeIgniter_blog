@@ -170,7 +170,30 @@ class Setup_model extends CI_Model {
 
         );
         return createTable($fields_files,'id','filesXML');
+    }
 
+    public function createFilesXmlEditTable()
+    {
+
+        $fields_files = array(
+            'id'=>array(
+                'type'=>'INT',
+                'constraint' => 11,
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
+            ),
+            'filename'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+
+            ),
+            'server_name'=>array(
+                'type' => 'VARCHAR',
+                'constraint'=>'255'
+            )
+
+        );
+        return createTable($fields_files,'id','FilesXmlEdit');
 
     }
     public function createCdtTrfTxInfTable()

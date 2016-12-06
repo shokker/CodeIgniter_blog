@@ -18,11 +18,11 @@
 <?php endforeach; ?>
 
 <h2>Edited Xml</h2>
-<?php foreach(glob($xml_directory.'/*.*') as $file) : ?>
+<?php foreach($xmls_edit as $xml_edit) : ?>
     <div class="post">
     <div class="post_header">
 
-        <h3><?= anchor($file, explode('/',$file)[1]) ?></h3>
+        <h3><?= anchor('/xml_edit/test-'.$xml_edit->server_name,$xml_edit->filename) ?></h3>
     </div>
     </div>
 <?php endforeach; ?>

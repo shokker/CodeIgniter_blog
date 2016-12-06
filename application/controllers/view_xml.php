@@ -18,6 +18,7 @@ class View_xml extends CI_Controller {
 
         $this->data['title'] = 'XML';
         $this->data['xmls'] = $this->view_xml_model->get();
+        $this->data['xmls_edit'] = $this->view_xml_model->get_edit();
         $this->data['xml_directory'] = 'xml_edit';
 
 
@@ -28,28 +29,30 @@ class View_xml extends CI_Controller {
     public function edit_xml($file)
     {
         $this->data['title'] = 'EDIT';
-            $this->data['source'] = $file;
-            $this->data['xml'] = $this->view_xml_model->xml2array('xml/'.$file);
+            $this->data['source'] = urldecode($file);
+            $this->data['xml'] = $this->view_xml_model->xml2array('xml/'.urldecode($file));
 
             $this->template->view('xml_edit_experiment_view', $this->data);
+    }
+
+    public function database()
+    {
+        $this->view_xml_model->xml_database($_POST);
     }
 
     public function edit_proceed_xml($xml)
     {
 
-        if (isset($_POST['database'])){
-            $this->view_xml_model->xml_database();
-        }
-        else{
-            $edited_xml= $this->view_xml_model->process($xml);
+
+            $filename = $this->view_xml_model->process(urldecode($xml));
 
             if (isset($_POST['save'])) {
-                    $this->view_xml_model->download($xml);
+                    $this->view_xml_model->download(urldecode($xml),$filename);
 
             }
-        }
+            redirect('view_xml');
 
-        redirect('view_xml');
+
 
     }
 
